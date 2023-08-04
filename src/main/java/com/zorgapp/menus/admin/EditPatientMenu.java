@@ -79,7 +79,7 @@ public class EditPatientMenu implements Menu {
                     String height = scanner.nextLine();
                     this.patient.setHeight(Double.parseDouble(height));
                 }
-                case "7" -> new EditMedicineMenu().show();
+                case "7" -> new MedicineMenu(this.language, this.patient).show();
                 default -> {
                     System.err.println("\r\nINVALID INPUT");
                     continue;

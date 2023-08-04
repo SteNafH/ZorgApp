@@ -51,7 +51,6 @@ public class WeightMenu implements Menu {
 
             String input = scanner.nextLine();
 
-            //TODO
             switch (input) {
                 case "0" -> {
                     return;

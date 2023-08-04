@@ -1,18 +1,19 @@
-package com.zorgapp.menus.patient;
+package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
+import com.zorgapp.menus.patient.MedicineMenu;
 import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 import java.util.Scanner;
 
-public class EditPatientMenu implements Menu {
+public class PatientMenu implements Menu {
     private final Data data;
     private final Language language;
     private final Patient patient;
 
-    public EditPatientMenu(Language language, Patient patient) {
+    public PatientMenu(Language language, Patient patient) {
         this.data = Data.getInstance();
         this.language = language;
         this.patient = patient;
@@ -24,10 +25,14 @@ public class EditPatientMenu implements Menu {
 
         while (true) {
             String string = "\r\n-----------------------------------------------" +
-                    "\r\n0 - RETURN" +
-                    "\r\n1 - CALL NAME:              " + this.patient.getCallName() +
+                    this.patient.toLongString() +
                     "\r\n-----------------------------------------------" +
-                    "\r\nCHOOSE OPTION:";
+                    "\r\n0 - RETURN" +
+                    "\r\n1 - EDIT PATIENT" +
+                    "\r\n2 - SHOW WEIGHT PROGRESS" +
+                    "\r\n3 - MEDICINE INFO" +
+                    "\r\n4 - DELETE PATIENT" +
+                    "\r\n\r\nENTER CHOICE:";
 
             System.out.println(string);
             String input = scanner.nextLine();
@@ -36,10 +41,12 @@ public class EditPatientMenu implements Menu {
                 case "0" -> {
                     return;
                 }
-                case "1" -> {
-                    System.out.println("\r\nENTER NEW CALL NAME:");
-                    String callName = scanner.nextLine();
-                    this.patient.setCallName(callName);
+                case "1" -> new EditPatientMenu(this.language, this.patient).show();
+                case "2" -> new WeightMenu(this.language, this.patient).show();
+                case "3" -> new MedicineMenu(this.language, this.patient).show();
+                case "4" -> {
+                    this.data.deletePatient(patient);
+                    return;
                 }
                 default -> System.err.println("\r\nINVALID INPUT");
             }

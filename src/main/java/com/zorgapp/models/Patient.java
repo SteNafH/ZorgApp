@@ -14,7 +14,7 @@ public class Patient {
     private double height;
     private ArrayList<PatientMedicine> medicineList;
 
-    public Patient(int id, String surName, String firstName, String callName, LocalDate dateOfBirth, ArrayList<Weight> weightList, double height, ArrayList<PatientMedicine> patientMedicineList) {
+    public Patient(int id, String surName, String firstName, String callName, LocalDate dateOfBirth, ArrayList<Weight> weightList, double height, ArrayList<PatientMedicine> medicineList) {
         this.id = id;
         this.surName = surName;
         this.firstName = firstName;
@@ -69,8 +69,9 @@ public class Patient {
         return this.weightList;
     }
 
-    public void setWeightList(ArrayList<Weight> weightList) {
-        this.weightList = weightList;
+    public void setWeight(double kg) {
+        Weight weight = new Weight(kg, LocalDate.now());
+        this.weightList.add(0, weight);
     }
 
     public double getHeight() {
@@ -121,7 +122,7 @@ public class Patient {
                 "\r\nCALL NAME:              " + this.callName +
                 "\r\nDATE OF BIRTH:          " + this.dateOfBirth + " (Age: " + age.getYears() + ")" +
                 "\r\nCURRENT WEIGHT:         " + weight.getWeight() + " KG, (Measured on: " + weight.getDate() + ")" +
-                "\r\nLENGTH:                 " + this.height +
+                "\r\nHEIGHT:                 " + this.height +
                 "\r\nBMI:                    " + bmi + " (" + this.getHealthStatus(bmi).getDescription() + ")" +
                 "\r\nMEDICINE:               " + String.join(", ", this.medicineList.stream().map(PatientMedicine::toString).toList());
     }

@@ -10,10 +10,12 @@ import com.zorgapp.models.Patient;
 import java.util.Scanner;
 
 public class LoginMenu implements Menu {
+    private final Data data;
     private Menu menu;
-    private Language language;
+    private final Language language;
 
     public LoginMenu(Language language) {
+        this.data = Data.getInstance();
         this.language = language;
     }
 
@@ -22,15 +24,15 @@ public class LoginMenu implements Menu {
 
         while (true) {
             System.out.println("\r\nENTER USER ID:");
-            String id = scanner.nextLine();
+            String input = scanner.nextLine();
 
-            if (id.equals("0")) {
+            if (input.equals("0")) {
                 this.menu = new AdminMenu(this.language);
                 return;
             }
 
             try {
-                Patient patient = Data.getInstance().getPatient(Integer.parseInt(id));
+                Patient patient = this.data.getPatient(Integer.parseInt(input));
                 this.menu = new PatientMenu(this.language, patient);
 
                 return;

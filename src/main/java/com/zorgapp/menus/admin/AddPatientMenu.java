@@ -51,7 +51,7 @@ public class AddPatientMenu implements Menu {
         }
 
         Patient patient = new Patient(id, surName, firstName, callName, dateOfBirth, new ArrayList<>(), height, new ArrayList<>());
-        patient.setWeight(weight);
+        patient.addWeight(weight);
 
         this.data.addPatient(patient);
     }

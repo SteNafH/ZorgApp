@@ -5,14 +5,14 @@ import java.time.Period;
 import java.util.ArrayList;
 
 public class Patient {
-    private int id;
+    private final int id;
     private String surName;
     private String firstName;
     private String callName;
     private LocalDate dateOfBirth;
-    private ArrayList<Weight> weightList;
+    private final ArrayList<Weight> weightList;
     private double height;
-    private ArrayList<PatientMedicine> medicineList;
+    private final ArrayList<PatientMedicine> medicineList;
 
     public Patient(int id, String surName, String firstName, String callName, LocalDate dateOfBirth, ArrayList<Weight> weightList, double height, ArrayList<PatientMedicine> medicineList) {
         this.id = id;
@@ -27,10 +27,6 @@ public class Patient {
 
     public int getId() {
         return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getSurName() {
@@ -69,7 +65,7 @@ public class Patient {
         return this.weightList;
     }
 
-    public void setWeight(double kg) {
+    public void addWeight(double kg) {
         Weight weight = new Weight(kg, LocalDate.now());
         this.weightList.add(0, weight);
     }
@@ -86,8 +82,8 @@ public class Patient {
         return this.medicineList;
     }
 
-    public void setMedicineList(ArrayList<PatientMedicine> medicineList) {
-        this.medicineList = medicineList;
+    public void addMedicine(PatientMedicine medicine) {
+        this.medicineList.add(medicine);
     }
 
     public double calcBMI(double height, double weight) {

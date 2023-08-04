@@ -5,8 +5,8 @@ import com.zorgapp.exceptions.PatientNotFoundException;
 import com.zorgapp.models.Patient;
 import com.zorgapp.adapters.LocalDateAdapter;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +22,26 @@ public class Data {
     }
 
     private void write() {
-        //TODO
+        URL resource = Data.class.getResource(Data.source);
+
+        if (resource == null) {
+            return;
+        }
+
+        try {
+            File file = new File(resource.getPath());
+            file.createNewFile();
+
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                    .create();
+
+            FileWriter writer = new FileWriter(file);
+            writer.write(gson.toJson(this.patients));
+            writer.close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public static void init(String source) {
@@ -30,7 +49,6 @@ public class Data {
         InputStream stream = Data.class.getResourceAsStream(source);
 
         if (stream == null) {
-            //TODO create resource...
             Data.instance = new Data(new ArrayList<>());
             return;
         }
@@ -74,7 +92,7 @@ public class Data {
         this.write();
     }
 
-    public void updatePatient(Patient newPatient) {
+    public void updatePatient(Patient patient) {
         this.write();
     }
 }

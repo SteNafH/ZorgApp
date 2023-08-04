@@ -72,7 +72,7 @@ public class EditPatientMenu implements Menu {
                 case "5" -> {
                     System.out.println("\r\nENTER NEW WEIGHT (KG):");
                     String kg = scanner.nextLine();
-                    this.patient.setWeight(Double.parseDouble(kg));
+                    this.patient.addWeight(Double.parseDouble(kg));
                 }
                 case "6" -> {
                     System.out.println("\r\nENTER NEW HEIGHT:");

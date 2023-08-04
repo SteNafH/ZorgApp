@@ -1,6 +1,7 @@
 package com.zorgapp.menus.patient;
 
 import com.zorgapp.data.Data;
+import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.models.Patient;
 
@@ -19,10 +20,10 @@ public class EditPatientMenu implements Menu {
 
         while (true) {
             String string = "\r\n-----------------------------------------------" +
-                    "\r\n0 - RETURN" +
-                    "\r\n1 - CALL NAME:              " + this.patient.getCallName() +
+                    "\r\n0 - " + Languages.getString("return") +
+                    "\r\n1 - " + Languages.getString("callName") + ":" + this.patient.getCallName() +
                     "\r\n-----------------------------------------------" +
-                    "\r\nCHOOSE OPTION:";
+                    "\r\n"  + Languages.getString("chooseOption") + ":";
 
             System.out.println(string);
             String input = scanner.nextLine();
@@ -32,12 +33,12 @@ public class EditPatientMenu implements Menu {
                     return;
                 }
                 case "1" -> {
-                    System.out.println("\r\nENTER NEW CALL NAME:");
+                    System.out.println("\r\n" + Languages.getString("enterNewCallName") +":");
                     String callName = scanner.nextLine();
                     this.patient.setCallName(callName);
                 }
                 default -> {
-                    System.err.println("\r\nINVALID INPUT");
+                    System.err.println("\r\n" + Languages.getString("invalidInput"));
                     continue;
                 }
             }

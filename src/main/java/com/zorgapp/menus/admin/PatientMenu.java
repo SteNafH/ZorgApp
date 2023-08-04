@@ -1,6 +1,7 @@
 package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
+import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.menus.patient.MedicineMenu;
 import com.zorgapp.models.Patient;
@@ -22,12 +23,12 @@ public class PatientMenu implements Menu {
             String string = "\r\n-----------------------------------------------" +
                     this.patient.toLongString() +
                     "\r\n-----------------------------------------------" +
-                    "\r\n0 - RETURN" +
-                    "\r\n1 - EDIT PATIENT" +
-                    "\r\n2 - SHOW WEIGHT PROGRESS" +
-                    "\r\n3 - MEDICINE INFO" +
-                    "\r\n4 - DELETE PATIENT" +
-                    "\r\n\r\nENTER CHOICE:";
+                    "\r\n0 - " + Languages.getString("return") +
+                    "\r\n1 - " + Languages.getString("editPatient") +
+                    "\r\n2 - " + Languages.getString("showWeightProgress") +
+                    "\r\n3 - " + Languages.getString("medicineInfo") +
+                    "\r\n4 - " + Languages.getString("deletePatient") +
+                    "\r\n\r\n" + Languages.getString("chooseOption") + ":";
 
             System.out.println(string);
             String input = scanner.nextLine();
@@ -43,7 +44,7 @@ public class PatientMenu implements Menu {
                     Data.deletePatient(patient);
                     return;
                 }
-                default -> System.err.println("\r\nINVALID INPUT");
+                default -> System.err.println("\r\n" + Languages.getString("invalidInput"));
             }
         }
     }

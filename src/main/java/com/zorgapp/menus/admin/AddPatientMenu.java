@@ -1,6 +1,7 @@
 package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
+import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.models.Patient;
 
@@ -15,22 +16,22 @@ public class AddPatientMenu implements Menu {
     public void show() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\r\nENTER SURNAME:");
+        System.out.println("\r\n" + Languages.getString("enterSurName") + ":");
         String surName = scanner.nextLine();
 
-        System.out.println("\r\nENTER FIRST NAME:");
+        System.out.println("\r\n" + Languages.getString("enterFirstName") + ":");
         String firstName = scanner.nextLine();
 
-        System.out.println("\r\nENTER CALL NAME:");
+        System.out.println("\r\n" + Languages.getString("enterCallName") + ":");
         String callName = scanner.nextLine();
 
-        System.out.println("\r\nENTER DATE OF BIRTH (YYYY-MM-DD):");
+        System.out.println("\r\n" + Languages.getString("enterDateOfBirth") + " (YYYY-MM-DD):");
         LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine());
 
-        System.out.println("\r\nENTER WEIGHT (KG):");
+        System.out.println("\r\n" + Languages.getString("enterWeight") + " (KG):");
         double weight = Double.parseDouble(scanner.nextLine());
 
-        System.out.println("\r\nENTER HEIGHT (M):");
+        System.out.println("\r\n" + Languages.getString("enterHeight") + " (M):");
         double height = Double.parseDouble(scanner.nextLine());
 
         int id;

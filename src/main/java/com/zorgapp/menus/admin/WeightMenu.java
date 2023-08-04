@@ -1,6 +1,7 @@
 package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
+import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.models.Patient;
 import com.zorgapp.models.Weight;
@@ -38,10 +39,10 @@ public class WeightMenu implements Menu {
             }
 
             builder.append("\r\n-----------------------------------------------")
-                    .append("\r\n0 - RETURN")
-                    .append("\r\n1 - EDIT PREVIOUS WEIGHT")
-                    .append("\r\n2 - ADD NEW WEIGHT")
-                    .append("\r\n3 - DELETE WEIGHT");
+                    .append("\r\n0 - ").append(Languages.getString("return"))
+                    .append("\r\n1 - ").append(Languages.getString("editPreviousWeight"))
+                    .append("\r\n2 - ").append(Languages.getString("addNewWeight"))
+                    .append("\r\n3 - ").append(Languages.getString("deleteWeight"));
             System.out.println(builder);
 
             String input = scanner.nextLine();
@@ -51,16 +52,16 @@ public class WeightMenu implements Menu {
                     return;
                 }
                 case "1" -> {
-                    Weight weight = this.selectWeightMenu(weightList, "\r\nCHOOSE WEIGHT TO EDIT");
+                    Weight weight = this.selectWeightMenu(weightList, "\r\n" + Languages.getString("chooseWeightToEdit"));
 
                     if (weight == null) {
                         continue;
                     }
 
-                    System.out.println("\r\nENTER WEIGHT (KG):");
+                    System.out.println("\r\n" + Languages.getString("enterWeight") + " (KG):");
                     double kg = Double.parseDouble(scanner.nextLine());
 
-                    System.out.println("\r\nENTER DATE OF MEASURE (YYYY-MM-DD):");
+                    System.out.println("\r\n" + Languages.getString("enterDateOfMeasure") + "(YYYY-MM-DD):");
                     LocalDate dateOfMeasure = LocalDate.parse(scanner.nextLine());
 
                     weight.setWeight(kg);
@@ -68,20 +69,20 @@ public class WeightMenu implements Menu {
                     weightList.sort((patient1, patient2) -> patient2.getDate().compareTo(patient1.getDate()));
                 }
                 case "2" -> {
-                    System.out.println("\r\nENTER WEIGHT (KG):");
+                    System.out.println("\r\n" + Languages.getString("enterWeight") + " (KG):");
                     double weight = Double.parseDouble(scanner.nextLine());
 
                     this.patient.addWeight(weight);
                 }
                 case "3" -> {
-                    Weight weight = this.selectWeightMenu(weightList, "\r\nCHOOSE WEIGHT TO DELETE");
+                    Weight weight = this.selectWeightMenu(weightList, "\r\n" + Languages.getString("chooseWeightToDelete"));
 
                     if (weight != null) {
                         weightList.remove(weight);
                     }
                 }
                 default -> {
-                    System.err.println("\r\nINVALID INPUT");
+                    System.err.println("\r\n" + Languages.getString("invalidInput"));
                     continue;
                 }
             }
@@ -96,7 +97,7 @@ public class WeightMenu implements Menu {
         while (true) {
             StringBuilder builder = new StringBuilder();
             builder.append("\r\n-----------------------------------------------")
-                    .append("\r\n0 - RETURN");
+                    .append("\r\n0 - ").append(Languages.getString("return"));
 
             for (int i = 0; i < weightList.size(); i++) {
                 Weight weight = weightList.get(i);
@@ -121,9 +122,9 @@ public class WeightMenu implements Menu {
                     return weight;
                 }
 
-                System.err.println("\r\nINVALID INPUT");
+                System.err.println("\r\n" + Languages.getString("invalidInput"));
             } catch (NumberFormatException exception) {
-                System.err.println("\r\nINVALID INPUT");
+                System.err.println("\r\n" + Languages.getString("invalidInput"));
             }
         }
     }

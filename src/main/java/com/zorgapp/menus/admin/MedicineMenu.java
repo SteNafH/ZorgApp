@@ -1,6 +1,7 @@
 package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
+import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.models.Medicine;
 import com.zorgapp.models.Patient;
@@ -25,10 +26,10 @@ public class MedicineMenu implements Menu {
             String string = "\r\n-----------------------------------------------" +
                     String.join("\r\n-----------------------------------------------", medicineList.stream().map(patientMedicine -> "\r\n" + patientMedicine.getAmount() + " mg " + patientMedicine.getMedicine().getName()).toList()) +
                     "\r\n-----------------------------------------------" +
-                    "\r\n0 - RETURN" +
-                    "\r\n1 - EDIT MEDICINE" +
-                    "\r\n2 - ADD MEDICINE" +
-                    "\r\n3 - DELETE MEDICINE";
+                    "\r\n0 - " + Languages.getString("return") +
+                    "\r\n1 - " + Languages.getString("editMedicine") +
+                    "\r\n2 - " + Languages.getString("addMedicine") +
+                    "\r\n3 - " + Languages.getString("deleteMedicine");
             System.out.println(string);
 
             String input = scanner.nextLine();
@@ -37,7 +38,7 @@ public class MedicineMenu implements Menu {
                     return;
                 }
                 case "1" -> {
-                    PatientMedicine patientMedicine = this.selectPatientMedicineMenu(this.patient.getMedicineList(), "\r\nCHOOSE MEDICINE TO EDIT");
+                    PatientMedicine patientMedicine = this.selectPatientMedicineMenu(this.patient.getMedicineList(), "\r\n" + Languages.getString("chooseMedicineToEdit"));
 
                     if (patientMedicine == null) {
                         continue;
@@ -45,7 +46,7 @@ public class MedicineMenu implements Menu {
 
                     Medicine medicine = this.selectMedicineMenu();
 
-                    System.out.println("\r\nENTER AMOUNT (mg):");
+                    System.out.println("\r\n" + Languages.getString("enterAmount") + " (mg):");
                     int mg = Integer.parseInt(scanner.nextLine());
 
                     patientMedicine.setAmount(mg);
@@ -54,21 +55,21 @@ public class MedicineMenu implements Menu {
                 case "2" -> {
                     Medicine medicine = this.selectMedicineMenu();
 
-                    System.out.println("\r\nENTER AMOUNT (mg):");
+                    System.out.println("\r\n" + Languages.getString("enterAmount") + " (mg):");
                     int mg = Integer.parseInt(scanner.nextLine());
 
                     PatientMedicine patientMedicine = new PatientMedicine(mg, medicine);
                     this.patient.addMedicine(patientMedicine);
                 }
                 case "3" -> {
-                    PatientMedicine medicine = this.selectPatientMedicineMenu(this.patient.getMedicineList(), "\r\nCHOOSE MEDICINE TO DELETE");
+                    PatientMedicine medicine = this.selectPatientMedicineMenu(this.patient.getMedicineList(), "\r\n" + Languages.getString("chooseMedicineToDelete"));
 
                     if (medicine != null) {
                         medicineList.remove(medicine);
                     }
                 }
                 default -> {
-                    System.err.println("\r\nINVALID INPUT");
+                    System.err.println("\r\n" + Languages.getString("invalidInput"));
                     continue;
                 }
             }
@@ -84,7 +85,7 @@ public class MedicineMenu implements Menu {
         while (true) {
             StringBuilder builder = new StringBuilder();
             builder.append("\r\n-----------------------------------------------")
-                    .append("\r\n0 - RETURN");
+                    .append("\r\n0 - ").append(Languages.getString("return"));
 
             for (int i = 0; i < medicineList.length; i++) {
                 Medicine medicine = medicineList[i];
@@ -92,7 +93,7 @@ public class MedicineMenu implements Menu {
             }
 
             builder.append("\r\n-----------------------------------------------")
-                    .append("\r\nCHOOSE MEDICINE:");
+                    .append("\r\n").append(Languages.getString("chooseMedicine")).append(":");
             System.out.println(builder);
 
             String input = scanner.nextLine();
@@ -109,9 +110,9 @@ public class MedicineMenu implements Menu {
                     return medicine;
                 }
 
-                System.err.println("\r\nINVALID INPUT");
+                System.err.println("\r\n" + Languages.getString("invalidInput"));
             } catch (NumberFormatException exception) {
-                System.err.println("\r\nINVALID INPUT");
+                System.err.println("\r\n" + Languages.getString("invalidInput"));
             }
         }
     }
@@ -122,7 +123,7 @@ public class MedicineMenu implements Menu {
         while (true) {
             StringBuilder builder = new StringBuilder();
             builder.append("\r\n-----------------------------------------------")
-                    .append("\r\n0 - RETURN");
+                    .append("\r\n0 - ").append(Languages.getString("return"));
 
             for (int i = 0; i < medicineList.size(); i++) {
                 PatientMedicine medicine = medicineList.get(i);
@@ -147,9 +148,9 @@ public class MedicineMenu implements Menu {
                     return medicine;
                 }
 
-                System.err.println("\r\nINVALID INPUT");
+                System.err.println("\r\n" + Languages.getString("invalidInput"));
             } catch (NumberFormatException exception) {
-                System.err.println("\r\nINVALID INPUT");
+                System.err.println("\r\n" + Languages.getString("invalidInput"));
             }
         }
     }

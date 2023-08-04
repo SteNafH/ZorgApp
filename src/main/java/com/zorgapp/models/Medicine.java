@@ -1,25 +1,25 @@
 package com.zorgapp.models;
 
+import com.zorgapp.languages.Languages;
+
 public enum Medicine {
-    DICLOFENAC("Diclofenac", "Diclofenac is an anti-inflammatory pain reliever. It has an analgesic, anti-inflammatory and fever-reducing effect."),
-    AMOXICILLIN("Amoxicillin","Amoxicillin works against bacterial infections."),
-    OMEPRAZOLE("Omeprazole", "Omeprazol is an antacid. It reduces the production of acid in the stomach."),
-    DOXYCYCLINE("Doxycycline", "Doxycycline works against bacterial infections. Doxycycline also fights the malaria parasite."),
-    IBUPROFEN("Ibuprofen", "Ibuprofen is an anti-inflammatory pain reliever. It has an analgesic, anti-inflammatory and fever-reducing effect.");
+    DICLOFENAC("diclofenac"),
+    AMOXICILLIN("amoxicillin"),
+    OMEPRAZOLE("omeprazole"),
+    DOXYCYCLINE("doxycycline"),
+    IBUPROFEN("ibuprofen");
 
-    private final String name;
-    private final String info;
+    private final String key;
 
-    Medicine(String name, String info) {
-        this.name = name;
-        this.info = info;
+    Medicine(String key) {
+        this.key = key;
     }
 
     public String getName() {
-        return name;
+        return Languages.getString(this.key);
     }
 
     public String getInfo() {
-        return info;
+        return Languages.getString(this.key + "Info");
     }
 }

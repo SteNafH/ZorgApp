@@ -1,10 +1,7 @@
 package com.zorgapp.models;
 
-import com.google.gson.annotations.SerializedName;
-
 public class PatientMedicine {
     private int amount;
-    @SerializedName("medicine")
     private Medicine medicine;
 
     public PatientMedicine(int amount, Medicine medicine) {

@@ -1,5 +1,7 @@
 package com.zorgapp.models;
 
+import com.zorgapp.languages.Languages;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -105,7 +107,7 @@ public class Patient {
     @Override
     public String toString() {
         Period age = this.dateOfBirth.until(LocalDate.now());
-        return "PATIENT NUMBER: " + this.id + ", " + this.firstName + " " + this.surName + ", " + this.dateOfBirth + " (" + age.getYears() + ")";
+        return Languages.getString("patientNumber") + ": " + this.id + ", " + this.firstName + " " + this.surName + ", " + this.dateOfBirth + " (" + age.getYears() + ")";
     }
 
     public String toLongString() {
@@ -113,13 +115,13 @@ public class Patient {
         Weight weight = this.weightList.get(0);
         double bmi = this.calcBMI(this.height, weight.getWeight());
 
-        return "\r\nSURNAME:                " + this.surName +
-                "\r\nFIRST NAME:             " + this.firstName +
-                "\r\nCALL NAME:              " + this.callName +
-                "\r\nDATE OF BIRTH:          " + this.dateOfBirth + " (Age: " + age.getYears() + ")" +
-                "\r\nCURRENT WEIGHT:         " + weight.getWeight() + " KG, (Measured on: " + weight.getDate() + ")" +
-                "\r\nHEIGHT:                 " + this.height +
-                "\r\nBMI:                    " + bmi + " (" + this.getHealthStatus(bmi).getDescription() + ")" +
-                "\r\nMEDICINE:               " + String.join(", ", this.medicineList.stream().map(PatientMedicine::toString).toList());
+        return "\r\n" + Languages.getString("surName") + ": " + this.surName +
+                "\r\n" + Languages.getString("firstName") + ": " + this.firstName +
+                "\r\n" + Languages.getString("callName") + ": " + this.callName +
+                "\r\n" + Languages.getString("dateOfBirth") + ": " +  this.dateOfBirth + " (" + Languages.getString("age") + ": " + age.getYears() + ")" +
+                "\r\n" + Languages.getString("currentWeight") + ": " +  weight.getWeight() + " KG, (" + Languages.getString("measuredOn") + ": " + weight.getDate() + ")" +
+                "\r\n" + Languages.getString("height") + ": " +  this.height +
+                "\r\n" + Languages.getString("bmi") + ": " +  bmi + " (" + this.getHealthStatus(bmi).getDescription() + ")" +
+                "\r\n" + Languages.getString("medicine") + ": " + String.join(", ", this.medicineList.stream().map(PatientMedicine::toString).toList());
     }
 }

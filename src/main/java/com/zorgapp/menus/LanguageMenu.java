@@ -30,7 +30,7 @@ public class LanguageMenu implements Menu {
                     this.language = Language.ENGLISH;
                     return;
                 }
-                default -> System.err.println("\r\nINVALID INPUT");
+                default -> System.err.println("\r\nINVALID INPUT // ONGELDIGE INVOER");
             }
         }
     }

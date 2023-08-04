@@ -1,6 +1,7 @@
 package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
+import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.models.Patient;
 
@@ -12,7 +13,7 @@ public class AdminMenu implements Menu {
     private String sortOption;
 
     public AdminMenu() {
-        this.sortOption = "SURNAME";
+        this.sortOption = "surName";
     }
 
     @Override
@@ -21,7 +22,7 @@ public class AdminMenu implements Menu {
 
         while (true) {
             ArrayList<Patient> patients = Data.getPatients();
-            if (this.sortOption.equals("SURNAME")) {
+            if (this.sortOption.equals("surName")) {
                 patients.sort(Comparator.comparing(Patient::getSurName));
             } else {
                 patients.sort(Comparator.comparing(Patient::getId));
@@ -35,11 +36,11 @@ public class AdminMenu implements Menu {
             }
 
             builder.append("\r\n-----------------------------------------------")
-                    .append("\r\n0 - STOP PROGRAM")
-                    .append("\r\n1 - CHOOSE PATIENT")
-                    .append("\r\n2 - ADD PATIENT")
-                    .append("\r\n3 - SORT BY ").append(this.sortOption)
-                    .append("\r\n\r\nENTER CHOICE:");
+                    .append("\r\n0 - ").append(Languages.getString("stopProgram"))
+                    .append("\r\n1 - ").append(Languages.getString("choosePatient"))
+                    .append("\r\n2 - ").append(Languages.getString("addPatient"))
+                    .append("\r\n3 - ").append(Languages.getString("sortBy")).append(" ").append(Languages.getString(this.sortOption))
+                    .append("\r\n\r\n").append(Languages.getString("chooseOption")).append(":");
 
             System.out.println(builder);
             String input = scanner.nextLine();
@@ -48,8 +49,8 @@ public class AdminMenu implements Menu {
                 case "0" -> System.exit(0);
                 case "1" -> new ChoosePatientMenu().show();
                 case "2" -> new AddPatientMenu().show();
-                case "3" -> this.sortOption = this.sortOption.equals("SURNAME") ? "PATIENT NUMBER" : "SURNAME";
-                default -> System.err.println("\r\nINVALID INPUT");
+                case "3" -> this.sortOption = this.sortOption.equals("surName") ? "patientNumber" : "surName";
+                default -> System.err.println("\r\n" + Languages.getString("invalidInput"));
             }
         }
     }

@@ -1,7 +1,6 @@
 package com.zorgapp;
 
 import com.zorgapp.data.Data;
-import com.zorgapp.languages.Language;
 import com.zorgapp.languages.Languages;
 import com.zorgapp.menus.LanguageMenu;
 import com.zorgapp.menus.LoginMenu;
@@ -16,9 +15,7 @@ public class Main {
         LanguageMenu languageMenu = new LanguageMenu();
         languageMenu.show();
 
-        Language language = languageMenu.getLanguage();
-        Languages.init(language);
-        System.out.println(Languages.getString("test"));
+        Languages.init(languageMenu.getLanguage());
 
         LoginMenu loginMenu = new LoginMenu();
         loginMenu.show();

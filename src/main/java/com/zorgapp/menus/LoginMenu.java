@@ -4,20 +4,12 @@ import com.zorgapp.data.Data;
 import com.zorgapp.exceptions.PatientNotFoundException;
 import com.zorgapp.menus.admin.AdminMenu;
 import com.zorgapp.menus.patient.PatientMenu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 import java.util.Scanner;
 
 public class LoginMenu implements Menu {
-    private final Data data;
     private Menu menu;
-    private final Language language;
-
-    public LoginMenu(Language language) {
-        this.data = Data.getInstance();
-        this.language = language;
-    }
 
     public void show() {
         Scanner scanner = new Scanner(System.in);
@@ -27,13 +19,13 @@ public class LoginMenu implements Menu {
             String input = scanner.nextLine();
 
             if (input.equals("0")) {
-                this.menu = new AdminMenu(this.language);
+                this.menu = new AdminMenu();
                 return;
             }
 
             try {
-                Patient patient = this.data.getPatient(Integer.parseInt(input));
-                this.menu = new PatientMenu(this.language, patient);
+                Patient patient = Data.getPatient(Integer.parseInt(input));
+                this.menu = new PatientMenu(patient);
 
                 return;
             } catch (PatientNotFoundException exception) {

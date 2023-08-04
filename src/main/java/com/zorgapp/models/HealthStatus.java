@@ -6,7 +6,7 @@ public enum HealthStatus {
     OVERWEIGHT("Overweight"),
     OBESE("Obesity");
 
-    private String description;
+    private final String description;
 
     HealthStatus(String description) {
         this.description = description;

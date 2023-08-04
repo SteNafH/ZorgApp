@@ -2,7 +2,6 @@ package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 import com.zorgapp.models.Weight;
 
@@ -11,13 +10,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WeightMenu implements Menu {
-    private final Data data;
-    private final Language language;
     private final Patient patient;
 
-    public WeightMenu(Language language, Patient patient) {
-        this.data = Data.getInstance();
-        this.language = language;
+    public WeightMenu(Patient patient) {
         this.patient = patient;
     }
 
@@ -91,7 +86,7 @@ public class WeightMenu implements Menu {
                 }
             }
 
-            this.data.updatePatient(patient);
+            Data.updatePatient();
         }
     }
 

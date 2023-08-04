@@ -1,6 +1,6 @@
 package com.zorgapp.menus;
 
-import com.zorgapp.models.Language;
+import com.zorgapp.languages.Language;
 
 import java.util.Scanner;
 

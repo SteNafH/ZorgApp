@@ -1,15 +1,12 @@
 package com.zorgapp.menus.patient;
 
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 public class MedicineMenu implements Menu {
-    private final Language language;
     private final Patient patient;
 
-    public MedicineMenu(Language language, Patient patient) {
-        this.language = language;
+    public MedicineMenu(Patient patient) {
         this.patient = patient;
     }
 

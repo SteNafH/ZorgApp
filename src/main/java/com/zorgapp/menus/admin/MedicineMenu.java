@@ -2,7 +2,6 @@ package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Medicine;
 import com.zorgapp.models.Patient;
 import com.zorgapp.models.PatientMedicine;
@@ -11,13 +10,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MedicineMenu implements Menu {
-    private final Data data;
-    private final Language language;
     private final Patient patient;
 
-    public MedicineMenu(Language language, Patient patient) {
-        this.data = Data.getInstance();
-        this.language = language;
+    public MedicineMenu(Patient patient) {
         this.patient = patient;
     }
 
@@ -78,7 +73,7 @@ public class MedicineMenu implements Menu {
                 }
             }
 
-            this.data.updatePatient(patient);
+            Data.updatePatient();
         }
     }
 

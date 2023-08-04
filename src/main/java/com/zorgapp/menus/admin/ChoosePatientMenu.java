@@ -3,20 +3,11 @@ package com.zorgapp.menus.admin;
 import com.zorgapp.data.Data;
 import com.zorgapp.exceptions.PatientNotFoundException;
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 import java.util.Scanner;
 
 public class ChoosePatientMenu implements Menu {
-    private final Data data;
-    private final Language language;
-
-    public ChoosePatientMenu(Language language) {
-        this.data = Data.getInstance();
-        this.language = language;
-    }
-
     @Override
     public void show() {
         Scanner scanner = new Scanner(System.in);
@@ -25,7 +16,7 @@ public class ChoosePatientMenu implements Menu {
             StringBuilder builder = new StringBuilder();
             builder.append("\r\n-----------------------------------------------");
 
-            for (Patient patient : this.data.getPatients()) {
+            for (Patient patient : Data.getPatients()) {
                 builder.append("\r\n").append(patient);
             }
 
@@ -40,8 +31,8 @@ public class ChoosePatientMenu implements Menu {
             }
 
             try {
-                Patient patient = this.data.getPatient(Integer.parseInt(input));
-                new PatientMenu(this.language, patient).show();
+                Patient patient = Data.getPatient(Integer.parseInt(input));
+                new PatientMenu(patient).show();
             } catch (PatientNotFoundException | NumberFormatException exception) {
                 System.err.println("\r\nINVALID ENTRY");
             }

@@ -1,10 +1,10 @@
-package com.zorgapp.models;
+package com.zorgapp.languages;
 
 public enum Language {
     ENGLISH("en"),
     DUTCH("nl");
 
-    private String locale;
+    private final String locale;
 
     Language(String locale) {
         this.locale = locale;

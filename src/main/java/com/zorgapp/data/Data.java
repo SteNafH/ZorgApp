@@ -12,16 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Data {
-    private static Data instance;
     private static String source;
+    private static ArrayList<Patient> patients;
 
-    private final ArrayList<Patient> patients;
-
-    private Data(ArrayList<Patient> patients) {
-        this.patients = patients;
-    }
-
-    private void write() {
+    private static void write() {
         URL resource = Data.class.getResource(Data.source);
 
         if (resource == null) {
@@ -37,7 +31,7 @@ public class Data {
                     .create();
 
             FileWriter writer = new FileWriter(file);
-            writer.write(gson.toJson(this.patients));
+            writer.write(gson.toJson(Data.patients));
             writer.close();
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -49,7 +43,7 @@ public class Data {
         InputStream stream = Data.class.getResourceAsStream(source);
 
         if (stream == null) {
-            Data.instance = new Data(new ArrayList<>());
+            Data.patients = new ArrayList<>();
             return;
         }
 
@@ -58,23 +52,15 @@ public class Data {
                 .create();
 
         Patient[] patients = gson.fromJson(new InputStreamReader(stream), Patient[].class);
-        Data.instance = new Data(new ArrayList<>(Arrays.asList(patients)));
+        Data.patients = new ArrayList<>(Arrays.asList(patients));
     }
 
-    public static Data getInstance() {
-        if (Data.instance == null) {
-            throw new IllegalStateException("Data has not been initialized");
-        }
-
-        return Data.instance;
+    public static ArrayList<Patient> getPatients() {
+        return Data.patients;
     }
 
-    public ArrayList<Patient> getPatients() {
-        return this.patients;
-    }
-
-    public Patient getPatient(int id) throws PatientNotFoundException {
-        for (Patient patient : this.patients) {
+    public static Patient getPatient(int id) throws PatientNotFoundException {
+        for (Patient patient : Data.patients) {
             if (patient.getId() == id) {
                 return patient;
             }
@@ -82,18 +68,18 @@ public class Data {
         throw new PatientNotFoundException();
     }
 
-    public void addPatient(Patient patient) {
-        this.patients.add(patient);
-        this.write();
+    public static void addPatient(Patient patient) {
+        Data.patients.add(patient);
+        Data.write();
     }
 
-    public void deletePatient(Patient patient) {
-        this.patients.remove(patient);
-        this.write();
+    public static void deletePatient(Patient patient) {
+        Data.patients.remove(patient);
+        Data.write();
     }
 
-    public void updatePatient(Patient patient) {
-        this.write();
+    public static void updatePatient() {
+        Data.write();
     }
 }
 

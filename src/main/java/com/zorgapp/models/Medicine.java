@@ -7,8 +7,8 @@ public enum Medicine {
     DOXYCYCLINE("Doxycycline", "Doxycycline works against bacterial infections. Doxycycline also fights the malaria parasite."),
     IBUPROFEN("Ibuprofen", "Ibuprofen is an anti-inflammatory pain reliever. It has an analgesic, anti-inflammatory and fever-reducing effect.");
 
-    private String name;
-    private String info;
+    private final String name;
+    private final String info;
 
     Medicine(String name, String info) {
         this.name = name;

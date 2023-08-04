@@ -2,7 +2,6 @@ package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 import com.zorgapp.models.PatientMedicine;
 import com.zorgapp.models.Weight;
@@ -12,13 +11,9 @@ import java.time.Period;
 import java.util.Scanner;
 
 public class EditPatientMenu implements Menu {
-    private final Data data;
-    private final Language language;
     private final Patient patient;
 
-    public EditPatientMenu(Language language, Patient patient) {
-        this.data = Data.getInstance();
-        this.language = language;
+    public EditPatientMenu(Patient patient) {
         this.patient = patient;
     }
 
@@ -79,13 +74,13 @@ public class EditPatientMenu implements Menu {
                     String height = scanner.nextLine();
                     this.patient.setHeight(Double.parseDouble(height));
                 }
-                case "7" -> new MedicineMenu(this.language, this.patient).show();
+                case "7" -> new MedicineMenu(this.patient).show();
                 default -> {
                     System.err.println("\r\nINVALID INPUT");
                     continue;
                 }
             }
-            this.data.updatePatient(patient);
+            Data.updatePatient();
         }
     }
 }

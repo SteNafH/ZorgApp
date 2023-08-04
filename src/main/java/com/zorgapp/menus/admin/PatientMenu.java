@@ -3,19 +3,14 @@ package com.zorgapp.menus.admin;
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
 import com.zorgapp.menus.patient.MedicineMenu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 import java.util.Scanner;
 
 public class PatientMenu implements Menu {
-    private final Data data;
-    private final Language language;
     private final Patient patient;
 
-    public PatientMenu(Language language, Patient patient) {
-        this.data = Data.getInstance();
-        this.language = language;
+    public PatientMenu(Patient patient) {
         this.patient = patient;
     }
 
@@ -41,11 +36,11 @@ public class PatientMenu implements Menu {
                 case "0" -> {
                     return;
                 }
-                case "1" -> new EditPatientMenu(this.language, this.patient).show();
-                case "2" -> new WeightMenu(this.language, this.patient).show();
-                case "3" -> new MedicineMenu(this.language, this.patient).show();
+                case "1" -> new EditPatientMenu(this.patient).show();
+                case "2" -> new WeightMenu(this.patient).show();
+                case "3" -> new MedicineMenu(this.patient).show();
                 case "4" -> {
-                    this.data.deletePatient(patient);
+                    Data.deletePatient(patient);
                     return;
                 }
                 default -> System.err.println("\r\nINVALID INPUT");

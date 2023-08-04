@@ -2,19 +2,14 @@ package com.zorgapp.menus.patient;
 
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 import java.util.Scanner;
 
 public class EditPatientMenu implements Menu {
-    private final Data data;
-    private final Language language;
     private final Patient patient;
 
-    public EditPatientMenu(Language language, Patient patient) {
-        this.data = Data.getInstance();
-        this.language = language;
+    public EditPatientMenu(Patient patient) {
         this.patient = patient;
     }
 
@@ -47,7 +42,7 @@ public class EditPatientMenu implements Menu {
                 }
             }
 
-            this.data.updatePatient(patient);
+            Data.updatePatient();
         }
     }
 }

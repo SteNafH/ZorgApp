@@ -2,7 +2,6 @@ package com.zorgapp.menus.admin;
 
 import com.zorgapp.data.Data;
 import com.zorgapp.menus.Menu;
-import com.zorgapp.models.Language;
 import com.zorgapp.models.Patient;
 
 import java.time.LocalDate;
@@ -12,14 +11,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class AddPatientMenu implements Menu {
-    private final Data data;
-    private final Language language;
-
-    public AddPatientMenu(Language language) {
-        this.data = Data.getInstance();
-        this.language = language;
-    }
-
     @Override
     public void show() {
         Scanner scanner = new Scanner(System.in);
@@ -45,7 +36,7 @@ public class AddPatientMenu implements Menu {
         int id;
 
         try {
-            id = this.data.getPatients().stream().max(Comparator.comparing(Patient::getId)).get().getId() + 1;
+            id = Data.getPatients().stream().max(Comparator.comparing(Patient::getId)).get().getId() + 1;
         } catch (NoSuchElementException exception) {
             id = 1;
         }
@@ -53,6 +44,6 @@ public class AddPatientMenu implements Menu {
         Patient patient = new Patient(id, surName, firstName, callName, dateOfBirth, new ArrayList<>(), height, new ArrayList<>());
         patient.addWeight(weight);
 
-        this.data.addPatient(patient);
+        Data.addPatient(patient);
     }
 }

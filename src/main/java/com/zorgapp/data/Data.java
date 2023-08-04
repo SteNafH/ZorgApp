@@ -66,16 +66,16 @@ public class Data {
 
     public void addPatient(Patient patient) {
         this.patients.add(patient);
-        write();
+        this.write();
     }
 
     public void deletePatient(Patient patient) {
         this.patients.remove(patient);
-        write();
+        this.write();
     }
 
     public void updatePatient(Patient newPatient) {
-        //TODO
+        this.write();
     }
 }
 

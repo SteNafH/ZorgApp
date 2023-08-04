@@ -41,8 +41,13 @@ public class EditPatientMenu implements Menu {
                     String callName = scanner.nextLine();
                     this.patient.setCallName(callName);
                 }
-                default -> System.err.println("\r\nINVALID INPUT");
+                default -> {
+                    System.err.println("\r\nINVALID INPUT");
+                    continue;
+                }
             }
+
+            this.data.updatePatient(patient);
         }
     }
 }

@@ -80,8 +80,12 @@ public class EditPatientMenu implements Menu {
                     this.patient.setHeight(Double.parseDouble(height));
                 }
                 case "7" -> new EditMedicineMenu().show();
-                default -> System.err.println("\r\nINVALID INPUT");
+                default -> {
+                    System.err.println("\r\nINVALID INPUT");
+                    continue;
+                }
             }
+            this.data.updatePatient(patient);
         }
     }
 }
